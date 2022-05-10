@@ -7,7 +7,7 @@ Rond versie 3 van HTML realizeerde mensen dat de web environments groter en meer
 
 CSS staat voor “Cascading Style Sheets”, waar het “style sheet”-onderdeel daar is om de style van de elementen te definieren en het “cascading” deel verwijst naar het overerven van style eigenschappen. e.g. Als je bijv een `<div>` een style geeft, zullen automatisch alle kinderen van deze `<div>` dezelfde style ontvangen, daarnaast kan je voor een groep elementen een style definieren en dan voor een specifiek element een uitzondering maken.
 
-PHP is een acroniem voor "PHP: Hypertext Preprocessor", het is een breed gedragen open source scripttaal  
+PHP is een acroniem voor "PHP: Hypertext Preprocessor",  het is een breed gedragen open source scripttaal  
 PHP scripts worden uitgevoerd op de server, PHP is simple en gratis te downloaden.  
 
 ## Module
