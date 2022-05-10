@@ -7,9 +7,12 @@
     <body>
 
         <?php
+            /* JH TIP: De _ voor een variabele is een oud concept, dit hoeft niet meer */
             $_GenderError= $_NameError= $_EmailError= $_NumberEnteredError= $_CommentError= $_CommunicationError= "";
             $_Gender= $_Name= $_Email= $_NumberEntered= $_Comment= $_CommunicationInput= "";
             $_Valid = false;
+
+            /* JH EXtra: zet hier define("COMM_PREF", array( "email" => "Emailing", "phone" => "Phoning")) dan kan je dat in de validatie, formulier en bedankje gebruiken (idem voor GENDERS) */
 
             if($_SERVER["REQUEST_METHOD"] == "POST")
             {
@@ -18,11 +21,11 @@
                 if(isset($_POST["_FullName"])){$_Name = $_POST["_FullName"];}
                 if(isset($_POST["_EmailAdress"])){$_Email = $_POST["_EmailAdress"];}
                 if(isset($_POST["_PhoneNumber"])){$_NumberEntered = $_POST["_PhoneNumber"];}
-                if(isset($_POST["_Message"])){$_Comment = $_POST["_Message"];}
+                if(isset($_POST["_Message"])){$_Comment = $_POST["_Message"];} /* JH TIP: Ik zou de variabelen hetzelfde noemen als de input names, dus of beide $_Comment of $_Message */
                 if(isset($_POST["_Communication"])){$_CommunicationInput = $_POST["_Communication"];}
                 
                 //These if statements put the correct error message that is required if the field is not entered (correctly)
-                if(empty($_POST["_FullName"]))
+                if(empty($_POST["_FullName"] /* JH: Gebruik hier $_Name */))
                 {
                     $_NameError = "Name is required";
                 }
@@ -31,7 +34,7 @@
                     $_NameError= "Only letters and spaces allowed!";
                 }
                 
-                if(empty($_POST["_EmailAdress"]))
+                if(empty($_POST["_EmailAdress"] /* JH: Gebruik hier $_Email */))
                 {
                     $_EmailError = "Email is required";
                 }
@@ -40,20 +43,20 @@
                     $_EmailError= "Invalid email format";
                 }
                 
-                if(empty($_POST["_PhoneNumber"]))
+                if(empty($_POST["_PhoneNumber"] /* JH: Gebruik hier $_NumberEntered */))
                 {
                     $_NumberEnteredError = "Number is required";
                 }
                 
-                if(empty($_POST["_Message"]))
+                if(empty($_POST["_Message"]/* JH: Gebruik hier $_Comment */))
                 {
                     $_CommentError = "Message is required";
                 }
                 
-                if(empty($_POST["_Communication"]))
+                if(empty($_POST["_Communication"] /* JH: Gebruik hier $_CommunicationInput */))
                 {
                     $_CommunicationError = "Prefered communication type is required";
-                }
+                } /* JH Extra: else (In combinatie met de aanpassing in regel 15) zou je hier kunnen testen of de $_CommunicationInput een valid key is in de array COMM_PREF met array_key_exists() */
                 //This if statement makes the form invalid if one of the errors is active.
                 if(empty($_GenderError) && empty ($_NameError)&& empty ($_EmailError)&& empty ($_NumberEnteredError)&& empty ($_CommentError)&& empty ($_CommunicationError))
                 {
@@ -88,9 +91,9 @@
                     <label for="_Gender">What is your gender? <span class="error">* <?php echo $_GenderError;?></span></label> <!-- Dropdown field to enter Gender-->
                     <br>
                     <select name="_Gender" id="_Gender">
-                        <option value="Dhr."> Dhr.</option>
-                        <option value="Mvr."> Mvr.</option>
-                        <option value="Other."> Other.</option>
+                        <option value="Dhr."><!-- JH TIP: Je kan de value beter Engelstalig houden, bijv. mr --> Dhr.</option> <!-- JH: Mis hier de code om te zorgen dat Dhr geselecteerd wordt als er ergens anders in het formulier een probleem is -->
+                        <option value="Mvr."><!-- JH TIP: Je kan de value beter Engelstalig houden, bijv. mrs --> Mvr.</option> <!-- JH: Mis hier de code om te zorgen dat Mvr geselecteerd wordt als er ergens anders in het formulier een probleem is -->
+                        <option value="Other."><!-- JH TIP: Je kan de value beter Engelstalig houden, bijv. other --> Other.</option> <!-- JH: Mis hier de code om te zorgen dat Mvr geselecteerd wordt als er ergens anders in het formulier een probleem is -->
                     </select>
                      <br><br>
 
@@ -111,10 +114,11 @@
                     <span class="error">* <?php echo $_CommentError;?></span> <br><br>
 
                     <p> Please select your prefered method of communication </p> <!-- Radio menu to enter preffered communication type -->
-                    <input type="radio" id="_Emailing" name="_Communication"    <?php if (isset($_CommunicationInput) && $_CommunicationInput=="_Emailing") echo "checked";?>    value="Emailing"> Email
+                    <!-- JH Extra: in combinatie met de tip van regel 15 zou je hier een foreach (COMM_PREF as $_Key => $_Label) {... } alle opties als label kunnen plaatsen --> 
+                    <input type="radio" id="_Emailing" name="_Communication"    <?php if (isset($_CommunicationInput) && /* JH: De isset is niet nodig omdat je deze altijd aan een lege string toewijst */$_CommunicationInput=="_Emailing") echo "checked";?>    value="Emailing"> Email
                     
                     
-                    <input type="radio" id="_Phoning" name="_Communication"    <?php if (isset($_CommunicationInput) && $_CommunicationInput=="_Phoning") echo "checked";?>    value="_Phoning"> Phone
+                    <input type="radio" id="_Phoning" name="_Communication"    <?php if (isset($_CommunicationInput) && /* JH: De isset is niet nodig omdat je deze altijd aan een lege string toewijst */$_CommunicationInput=="_Phoning") echo "checked";?>    value="_Phoning"> Phone
                     <span class="error">* <?php echo $_CommunicationError;?></span> <br>
 
 
@@ -140,7 +144,7 @@
                 echo "<br>";
                 echo "<b> Your comment was: </b>". $_Comment;
                 echo "<br>";
-                echo "<b> Your prefered way of communication is: </b>". $_CommunicationInput;                
+                echo "<b> Your prefered way of communication is: </b>". $_CommunicationInput; /* JH TYPO: preferred */ /* JH Extra: in combinatie met de tip op regel 15 zou je hier COMM_PREF[$_CommunicationInput] kunnen gebruiken om de juiste tekst te laten zien */              
             } ?>
             
             <footer id="Footer">    <!--Tells the footer what to say-->
