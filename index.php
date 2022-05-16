@@ -52,6 +52,7 @@
    
     function showMenu()
     {
+		echo ' <div id="PageContainer"> ';
         echo '
         <body>
             <ul class="LinkList">		<!--Creates a Bullet list with links to the other pages of the website-->
@@ -71,8 +72,7 @@
     function showContent($_Page)
     {
         //A switch case to decide on which content to show according to the correct page
-        echo ' <div id="PageContainer"> ';
-        var_dump ($_Page);
+       
         switch ($_Page)
         {
             case 'home':
@@ -103,6 +103,5 @@
     {
         echo '</html>'; 
         //Closes the HTML type for the main pages
-       
     } 
 ?>
