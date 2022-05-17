@@ -7,11 +7,11 @@
         $_RequestedType = $_SERVER['REQUEST_METHOD']; 
         if($_RequestedType == 'POST')
         {
-            $_RequestedPage = getPostVar('page', 'home');
+            $_RequestedPage = getPostVar('page', 'Login');
         }
         else
         {
-            $_RequestedPage = getUrlVar('page', 'home');
+            $_RequestedPage = getUrlVar('page', 'Login');
         }
         return $_RequestedPage;
     }
@@ -58,16 +58,38 @@
             <ul class="LinkList">		<!--Creates a Bullet list with links to the other pages of the website-->
                 <li><a href="index.php?page=home"> HOME</a></li>	    
                 <li><a href="index.php?page=about"> ABOUT ME</a></li>
-                <li><a href="index.php?page=contact"> CONTACT</a></li> 
+                <li><a href="index.php?page=contact"> CONTACT</a></li>
             </ul>';
+    }
+    function showLoginMenu()
+    {
+        echo
+        '
+            <div id="PageContainer">
+        
+            <ul class="LinkList">
+                <li><a href="index.php?page=Login"> LOGIN</a></li> 
+                <li><a href="index.php?page=Register"> REGISTER</a></li> 
+            </ul>
+        ';
     }
     function showBody($_Page)
     {
         //Shows the standard body of the HTML pages
        
-        showMenu();
-        showContent($_Page);
-        showFooter();
+       
+        if($_Page == "Login" OR $_Page == "Register")
+        {
+           showLoginMenu();
+           showContent($_Page);
+           showFooter();
+        }
+        else
+        {
+            showMenu();
+            showContent($_Page);
+            showFooter();
+        }
     }
     function showContent($_Page)
     {
@@ -86,6 +108,14 @@
             case 'contact':
                 require('contact.php');
                 showContactContent();
+            break;
+            case 'Login':
+                require('Login.php');
+                showLoginContent();
+            break;
+            case 'Register':
+                require('Register.php');
+                showRegisterContent();
             break;
         }
         echo '</div> ';

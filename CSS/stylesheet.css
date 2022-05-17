@@ -53,19 +53,27 @@ textarea
 	height:				120px;
 	resize: 			none;
 }
-
+input[type=password]
+{
+    width:              200px;
+}
 label.MarginForAllingment
 {
 	/* Used to allign the textboxes  with eachother*/
 	display: 			inline-block;
 	width:				120px;
-	text-align:			left;
+	text-align:			center-left;
 }
 .pmessage
 {
 	font-size: 			10px;
 	color:				red;
 	font-style:			italic;
+}
+.pLoginmessage
+{
+    font-size:          15px;
+    color:				black;
 }
 span
 {
