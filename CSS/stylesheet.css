@@ -1,88 +1,88 @@
 #PageContainer
 {
-	/* General site values*/
-	position:			relative;
-	min-height: 		100vh;
-	max-width: 			800px;
-	margin: 			auto;
-	background-color:	white;
-	/* Changes general font size and Color */
-	font-size: 			12px;
-	color: 				#404040;
+    /* General site values*/
+    position:            relative;
+    min-height:          100vh;
+    max-width:           800px;
+    margin:              auto;
+    background-color:    white;
+    /* Changes general font size and Color */
+    font-size:           12px;
+    color:               #404040;
 }
 #Footer
 {
-	/* Gives the footer his location, text size and colors*/
-	position: 			relative;
-	width:				100%;
-	background-color: 	black;
-	color: 				white;
-	text-align: 		right;
-	font-size: 			10px;
-	margin-top:			10px;
+    /* Gives the footer his location, text size and colors*/
+    position:            relative;
+    width:               100%;
+    background-color:    black;
+    color:               white;
+    text-align:          right;
+    font-size:           10px;
+    margin-top:          10px;
 }
 ul.LinkList li
 {
-	/* Gives the unorganized list with this parameter its values and a border*/
-	list-style-type: 	none;
-	display: 			inline;
-	border: 			3px solid black;
+    /* Gives the unorganized list with this parameter its values and a border*/
+    list-style-type:     none;
+    display:             inline;
+    border:              3px solid black;
 }
 ul.LinkList li > a
 {
-	text-decoration: 	none;
-	color: 				white;
-	background-color: 	blue;
+    text-decoration:     none;
+    color:               white;
+    background-color:    blue;
 }
 h1
 {
-	/* Changes Header font size and allignment */
-	min-height: 		48px;
-	font-size: 			48px;
-	text-align: 		center;
+    /* Changes Header font size and allignment */
+    min-height:          48px;
+    font-size:           48px;
+    text-align:          center;
 }
 input[type=text]
 {
-	/* Changes textbox width to 400 pixels*/
-	width: 				400px;
+    /* Changes textbox width to 400 pixels*/
+    width:               400px;
 }
 textarea
 {
-	/* Changes textboxarea width to 400 pixels and height to 120, disables the rescale aswell*/
-	width: 				400px;
-	height:				120px;
-	resize: 			none;
+    /* Changes textboxarea width to 400 pixels and height to 120, disables the rescale aswell*/
+    width:                400px;
+    height:               120px;
+    resize:               none;
 }
 input[type=password]
 {
-    width:              200px;
+    width:                200px;
 }
 label.MarginForAllingment
 {
-	/* Used to allign the textboxes  with eachother*/
-	display: 			inline-block;
-	width:				120px;
-	text-align:			center-left;
+    /* Used to allign the textboxes  with eachother*/
+    display:              inline-block;
+    width:                120px;
+    text-align:           center-left;
 }
 .pmessage
 {
-	font-size: 			10px;
-	color:				red;
-	font-style:			italic;
+    font-size:            10px;
+    color:                red;
+    font-style:           italic;
 }
 .pLoginmessage
 {
-    font-size:          15px;
-    color:				black;
+    font-size:            15px;
+    color:                black;
 }
 span
 {
-	font-size: 			10px;
-	color:				red;
-	font-style:			italic;
+    font-size:            10px;
+    color:                red;
+    font-style:           italic;
 }
 label,
 textarea
 {
-	vertical-align: 	top;
+    vertical-align:       top;
 }

@@ -52,11 +52,11 @@
    
     function showMenu()
     {
-		echo ' <div id="PageContainer"> ';
+        echo ' <div id="PageContainer"> ';
         echo '
         <body>
-            <ul class="LinkList">		<!--Creates a Bullet list with links to the other pages of the website-->
-                <li><a href="index.php?page=home"> HOME</a></li>	    
+            <ul class="LinkList">        <!--Creates a Bullet list with links to the other pages of the website-->
+                <li><a href="index.php?page=home"> HOME</a></li>        
                 <li><a href="index.php?page=about"> ABOUT ME</a></li>
                 <li><a href="index.php?page=contact"> CONTACT</a></li>
             </ul>';
@@ -126,7 +126,7 @@
         echo '   
             <footer id="Footer"> <!--Tells the footer what to say-->
             &copy 2022 Stan van Vliet
-            </footer>	
+            </footer>    
         </body>';
     }
      function endDocument()
