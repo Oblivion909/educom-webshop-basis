@@ -39,18 +39,21 @@
     function beginDocument()
     {
         //Opens the HTML type for the main purpose of the pages
-        echo '<!doctype html> 
+        echo
+        '<!doctype html> 
         <html>'; 
     }
     function showHead()
     {
         //Shows the standard head function of the HTML pages
-        echo '<head>
+        echo
+        '<head>
             <link rel="Stylesheet" href="css\Stylesheet.css">
         </head>';
     }
     function showMenuItem($_Link, $_Label)
     {
+        
         echo
         '
             <ul class="LinkList"> 
@@ -60,7 +63,7 @@
     }
     function showMenu()
     {
-        echo ' <div id="PageContainer"> ';
+        
         echo '<body>';
             
         echo '<ul class="LinkList">';
@@ -73,6 +76,7 @@
     }
     function showBody($_Page)
     {
+        echo ' <div id="PageContainer"> ';
         //Shows the standard body of the HTML pages
         showMenu();
         showContent($_Page);
@@ -110,7 +114,7 @@
                 showRegisterContent();
             break;
         }
-        echo '</div> ';
+        echo'</body>';
     }
     function showFooter()
     {
@@ -120,8 +124,8 @@
             <footer id="Footer"> <!--Tells the footer what to say-->
             &copy 2022 Stan van Vliet
             </footer>    
-            </body>
         ';
+        echo '</div> ';
     }
     function endDocument()
     {
