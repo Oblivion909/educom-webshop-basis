@@ -1,4 +1,9 @@
 <?php
+    function showLoginHeader()
+    {
+        echo   "<h1> Login </h1>" ;
+    }
+
     function showLoginContent()
     {
         $_Password =  $_Email =""; 
@@ -6,7 +11,6 @@
         //Message for Login screen
         echo
         '
-            <h1> Login </h1>
             <p class="pLoginmessage"> Please enter login credentials below.</p>
             <br><br>
         ';

@@ -49,7 +49,6 @@
             <link rel="Stylesheet" href="css\Stylesheet.css">
         </head>';
     }
-   
     function showMenu()
     {
         echo ' <div id="PageContainer"> ';
@@ -59,37 +58,16 @@
                 <li><a href="index.php?page=home"> HOME</a></li>        
                 <li><a href="index.php?page=about"> ABOUT ME</a></li>
                 <li><a href="index.php?page=contact"> CONTACT</a></li>
-            </ul>';
-    }
-    function showLoginMenu()
-    {
-        echo
-        '
-            <div id="PageContainer">
-        
-            <ul class="LinkList">
                 <li><a href="index.php?page=Login"> LOGIN</a></li> 
                 <li><a href="index.php?page=Register"> REGISTER</a></li> 
-            </ul>
-        ';
+            </ul>';
     }
     function showBody($_Page)
     {
         //Shows the standard body of the HTML pages
-       
-       
-        if($_Page == "Login" OR $_Page == "Register")
-        {
-           showLoginMenu();
-           showContent($_Page);
-           showFooter();
-        }
-        else
-        {
-            showMenu();
-            showContent($_Page);
-            showFooter();
-        }
+        showMenu();
+        showContent($_Page);
+        showFooter();
     }
     function showContent($_Page)
     {
@@ -99,22 +77,27 @@
         {
             case 'home':
                 require('home.php');
+                showHomeHeader();
                 showHomeContent();
             break;
             case 'about':
                 require('about.php');
+                showAboutHeader();
                 showAboutContent();
             break;
             case 'contact':
                 require('contact.php');
+                showContactHeader();
                 showContactContent();
             break;
             case 'Login':
                 require('Login.php');
+                showLoginHeader();
                 showLoginContent();
             break;
             case 'Register':
                 require('Register.php');
+                showRegisterHeader();
                 showRegisterContent();
             break;
         }

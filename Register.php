@@ -1,4 +1,11 @@
 <?php
+    
+    function showRegisterHeader()
+    {
+        echo "<h1> Register </h1>";
+    }
+        
+    
     function showRegisterContent()
     {
          $_Name = $_Password = $_ScndPassword=  $_Email =""; 
@@ -6,7 +13,7 @@
         //Message for Login screen
         echo
         '
-            <h1> Register </h1>
+           
             <p class="pLoginmessage"> Please register below.</p>
             <br><br>
         ';
