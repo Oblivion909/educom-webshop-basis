@@ -36,7 +36,6 @@
             $_Comment = testInput(getPostVar("_Message"));
             $_CommunicationInput = testInput(getPostVar("_Communication"));
             
-            
             //These if statements put the correct error message that is required if the field is not entered (correctly)
             if(empty($_Gender))
             {

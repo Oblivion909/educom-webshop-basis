@@ -49,18 +49,27 @@
             <link rel="Stylesheet" href="css\Stylesheet.css">
         </head>';
     }
+    function showMenuItem($_Link, $_Label)
+    {
+        echo
+        '
+            <ul class="LinkList"> 
+                <li><a href = index.php?page=' .  $_Link . '> ' .  $_Label . '</a></li>
+            </ul>
+        ';
+    }
     function showMenu()
     {
         echo ' <div id="PageContainer"> ';
-        echo '
-        <body>
-            <ul class="LinkList">        <!--Creates a Bullet list with links to the other pages of the website-->
-                <li><a href="index.php?page=home"> HOME</a></li>        
-                <li><a href="index.php?page=about"> ABOUT ME</a></li>
-                <li><a href="index.php?page=contact"> CONTACT</a></li>
-                <li><a href="index.php?page=Login"> LOGIN</a></li> 
-                <li><a href="index.php?page=Register"> REGISTER</a></li> 
-            </ul>';
+        echo '<body>';
+            
+        echo '<ul class="LinkList">';
+            showMenuItem("home", "Home");
+            showMenuItem("about", "About");
+            showMenuItem("contact", "Contact");
+            showMenuItem("Login", "Login");
+            showMenuItem("Register", "Register");
+        echo '</ul>';
     }
     function showBody($_Page)
     {
@@ -105,14 +114,16 @@
     }
     function showFooter()
     {
-            // Standard footer for all pages
-        echo '   
+        // Standard footer for all pages
+        echo
+        '   
             <footer id="Footer"> <!--Tells the footer what to say-->
             &copy 2022 Stan van Vliet
             </footer>    
-        </body>';
+            </body>
+        ';
     }
-     function endDocument()
+    function endDocument()
     {
         echo '</html>'; 
         //Closes the HTML type for the main pages
