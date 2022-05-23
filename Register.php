@@ -5,8 +5,12 @@
         echo "<h1> Register </h1>";
     }
         
-    
     function showRegisterContent()
+    {
+        ValidateRegisterContent();
+    }
+    
+    function ValidateRegisterContent()
     {
          $_Name = $_Password = $_ScndPassword=  $_Email =""; 
         
@@ -20,7 +24,7 @@
         //A form to enter email, name and password and check them to see if they are correct
         echo 
         '
-            <form method="post" action="index.php?page=home">
+            <form method="post" action="index.php?page=Register">
                 
                 <label class="MarginForAllingment" for="_EmailAddress">Email Address:</label>
                 <input type="text" id="_EmailAddress" name= "_EmailAddress">

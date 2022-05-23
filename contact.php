@@ -153,7 +153,6 @@
     
     function showContactThanks($_Data)
     {
-        echo "<h1> Contact </h1>";
         //Sets the thank you messages after form is submitted
         echo "<b>Welcome: </b>";
         echo $_Data['_Gender'];
