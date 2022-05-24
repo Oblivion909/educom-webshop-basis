@@ -24,6 +24,10 @@
         $_PasswordError =  $_EmailError =""; 
         $_Valid = false;
         
+        $_MyFile = fopen("users.txt", "r") or die ("Cannot open file");  
+        $_String = fgets($_MyFile);
+        
+        
         //Message for Login screen
         echo
         '
@@ -32,9 +36,7 @@
         ';
         
         if($_SERVER["REQUEST_METHOD"] == "POST")
-        {
-            $_MyFile = fopen("users.txt", "r") or die ("Cannot open file");  
-            
+        {            
             //If the client submits the form, this checks if all the input fields are filled in and gives them te correct values
             $_Password = testInput(getPostVar("EnteredPassword"));
             $_Email = testInput(getPostVar("EnteredEmail"));
@@ -45,17 +47,8 @@
                 $_PasswordError = "Password is required";
             }
             
-            while(!feof($_MyFile))
-            {
-                $_String = fgets($_MyFile);
-                $_Parts = explode('|', $_String);
-                
-                if ($_Email != $_Parts[0])
-                {
-                    $_EmailError = "No account with that email";
-                }
-            }
-             
+            
+            
             if(empty($_Email))
             {
                 $_EmailError = "Email is required";
@@ -64,6 +57,30 @@
             {
                 $_EmailError= "Invalid email format";
             }   
+            else
+            {
+                $_FoundPassword = "";
+                
+                while(!feof($_MyFile))
+                {
+                    $_String = fgets($_MyFile);
+                    $_StringParts = explode('|', $_String);
+                        
+                    //var_dump($_StringParts);
+                    if ($_Email == $_StringParts[0])
+                    {
+                       $_FoundPassword = $_StringParts[2];
+                    }
+                }
+                if($_FoundPassword == "")
+                {
+                    $_EmailError = "Email is not recognised";
+                }
+                elseif($_FoundPassword != $_Password)
+                {
+                    $_PasswordError = "Password does not match";
+                }
+            }
             //This if statement makes the form invalid if one of the errors is active.
             if(empty ($_PasswordError)&& empty ($_EmailError))
             {
@@ -92,6 +109,30 @@
             </form
         ';
     }
+    
+    function validateUser($_Data)
+    {
+        $_MyFile = fopen("users.txt", "r") or die ("Cannot open file");  
+        $_String = fgets($_MyFile);
+            
+        // while(!feof($_MyFile))
+        // {
+            // $_String = fgets($_MyFile);
+            // $_StringParts = explode('|', $_String);
+                
+            // //var_dump($_StringParts);
+            // if (in_array($_Data['EnteredEmail'], $_StringParts))
+            // {
+                // var_dump($_StringParts);
+                // showLoginAuthorized($_Data);
+            // }
+            // else
+            // {
+                // $_Data['Valid'] = false;
+                // $_Data['EnteredEmailError'] = "No account with that email";
+            // }
+        // }
+    }
 
     function showLoginAuthorized($_Data)
     {
@@ -100,4 +141,5 @@
             Welcome user: ' . $_Data['EnteredEmail'] . '
         ';
     }
+   
 ?>

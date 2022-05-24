@@ -18,9 +18,6 @@
         }
     }
     
-    
-    
-    
     function ValidateRegisterContent()
     {
         $_Name = $_Password = $_ScndPassword=  $_Email =""; 
@@ -69,6 +66,7 @@
                     $_EmailError = "Email is already in use";
                 }
             }
+            fclose($_MyFile);
             if(empty($_Email))
             {
                 $_EmailError = "Email is required";
@@ -125,18 +123,13 @@
             </form
         ';
     }
-    
     function RegisterFormValidated($_Data)
     {
         $_MyFile = fopen("users.txt", "a") or die ("Unable to open file");
-        
-        echo
-        '
-            user: ' . $_Data['EnteredEmail'] . ' registerd
-        ';
         
         $_Text = $_Data['EnteredEmail']. "|" . $_Data['UserName']. "|" . $_Data['EnteredPassword'] . PHP_EOL;
         fwrite($_MyFile, $_Text);
         fclose($_MyFile);
     }
+    
 ?>
