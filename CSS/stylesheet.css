@@ -1,7 +1,6 @@
 #PageContainer
 {
     /* General site values*/
-    position:            relative;
     min-height:          100vh;
     max-width:           800px;
     margin:              auto;
@@ -27,6 +26,8 @@ ul.LinkList li
     list-style-type:     none;
     display:             inline;
     border:              3px solid black;
+    /* margin-top:          5px; */
+    /* margin-right:        5px; */
 }
 ul.LinkList li > a
 {

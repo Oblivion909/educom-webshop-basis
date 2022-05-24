@@ -39,57 +39,48 @@
     function beginDocument()
     {
         //Opens the HTML type for the main purpose of the pages
-        echo '<!doctype html> 
+        echo
+        '<!doctype html> 
         <html>'; 
     }
     function showHead()
     {
         //Shows the standard head function of the HTML pages
-        echo '<head>
+        echo
+        '<head>
             <link rel="Stylesheet" href="css\Stylesheet.css">
         </head>';
     }
-   
-    function showMenu()
+    function showMenuItem($_Link, $_Label)
     {
-        echo ' <div id="PageContainer"> ';
-        echo '
-        <body>
-            <ul class="LinkList">        <!--Creates a Bullet list with links to the other pages of the website-->
-                <li><a href="index.php?page=home"> HOME</a></li>        
-                <li><a href="index.php?page=about"> ABOUT ME</a></li>
-                <li><a href="index.php?page=contact"> CONTACT</a></li>
-            </ul>';
-    }
-    function showLoginMenu()
-    {
+        
         echo
         '
-            <div id="PageContainer">
-        
-            <ul class="LinkList">
-                <li><a href="index.php?page=Login"> LOGIN</a></li> 
-                <li><a href="index.php?page=Register"> REGISTER</a></li> 
+            <ul class="LinkList"> 
+                <li><a href = index.php?page=' .  $_Link . '> ' .  $_Label . '</a></li>
             </ul>
         ';
     }
+    function showMenu()
+    {
+        
+        echo '<body>';
+            
+        echo '<ul class="LinkList">';
+            showMenuItem("home", "Home");
+            showMenuItem("about", "About");
+            showMenuItem("contact", "Contact");
+            showMenuItem("Login", "Login");
+            showMenuItem("Register", "Register");
+        echo '</ul>';
+    }
     function showBody($_Page)
     {
+        echo ' <div id="PageContainer"> ';
         //Shows the standard body of the HTML pages
-       
-       
-        if($_Page == "Login" OR $_Page == "Register")
-        {
-           showLoginMenu();
-           showContent($_Page);
-           showFooter();
-        }
-        else
-        {
-            showMenu();
-            showContent($_Page);
-            showFooter();
-        }
+        showMenu();
+        showContent($_Page);
+        showFooter();
     }
     function showContent($_Page)
     {
@@ -99,37 +90,44 @@
         {
             case 'home':
                 require('home.php');
+                showHomeHeader();
                 showHomeContent();
             break;
             case 'about':
                 require('about.php');
+                showAboutHeader();
                 showAboutContent();
             break;
             case 'contact':
                 require('contact.php');
+                showContactHeader();
                 showContactContent();
             break;
             case 'Login':
                 require('Login.php');
+                showLoginHeader();
                 showLoginContent();
             break;
             case 'Register':
                 require('Register.php');
+                showRegisterHeader();
                 showRegisterContent();
             break;
         }
-        echo '</div> ';
+        echo'</body>';
     }
     function showFooter()
     {
-            // Standard footer for all pages
-        echo '   
+        // Standard footer for all pages
+        echo
+        '   
             <footer id="Footer"> <!--Tells the footer what to say-->
             &copy 2022 Stan van Vliet
             </footer>    
-        </body>';
+        ';
+        echo '</div> ';
     }
-     function endDocument()
+    function endDocument()
     {
         echo '</html>'; 
         //Closes the HTML type for the main pages
