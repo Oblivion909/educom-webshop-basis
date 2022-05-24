@@ -78,15 +78,7 @@
         //Returns all values as an array for later use.
         return array("_Gender" => $_Gender, "_GenderError" => $_GenderError, "_FullName" => $_Name, "_NameError" => $_NameError, "_Email" => $_Email, "_EmailError" => $_EmailError, "_PhoneNumber" => $_NumberEntered, "_NumberError" => $_NumberEnteredError, "_Message" => $_Comment, "_CommentError" => $_CommentError, "_Communication" => $_CommunicationInput, "_CommunicationError" => $_CommunicationError, "Valid" => $_Valid);
     }
-    
-    function testInput($_Data)
-    {
-        $_Data = trim($_Data);
-        $_Data = stripslashes($_Data);
-        $_Data = htmlspecialchars($_Data);
-        return $_Data;
-    }    
-    
+   
     function showContactForm($_Data)
     {
         echo ' 

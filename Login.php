@@ -33,6 +33,8 @@
         
         if($_SERVER["REQUEST_METHOD"] == "POST")
         {
+            $_MyFile = fopen("users.txt", "r") or die ("Cannot open file");  
+            
             //If the client submits the form, this checks if all the input fields are filled in and gives them te correct values
             $_Password = testInput(getPostVar("EnteredPassword"));
             $_Email = testInput(getPostVar("EnteredEmail"));
@@ -42,6 +44,18 @@
             {
                 $_PasswordError = "Password is required";
             }
+            
+            while(!feof($_MyFile))
+            {
+                $_String = fgets($_MyFile);
+                $_Parts = explode('|', $_String);
+                
+                if ($_Email != $_Parts[0])
+                {
+                    $_EmailError = "No account with that email";
+                }
+            }
+             
             if(empty($_Email))
             {
                 $_EmailError = "Email is required";
@@ -86,12 +100,4 @@
             Welcome user: ' . $_Data['EnteredEmail'] . '
         ';
     }
-    
-    function testInput($_Data)
-    {
-        $_Data = trim($_Data);
-        $_Data = stripslashes($_Data);
-        $_Data = htmlspecialchars($_Data);
-        return $_Data;
-    }   
 ?>

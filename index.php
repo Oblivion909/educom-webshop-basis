@@ -127,6 +127,13 @@
         ';
         echo '</div> ';
     }
+    function testInput($_Data)
+    {
+        $_Data = trim($_Data);
+        $_Data = stripslashes($_Data);
+        $_Data = htmlspecialchars($_Data);
+        return $_Data;
+    }  
     function endDocument()
     {
         echo '</html>'; 
