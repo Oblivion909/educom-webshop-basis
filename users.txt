@@ -1,6 +1,2 @@
 EMAIL|USERNAME|PASSWORD
 123@123.com|Stan|123
-1234@1234.com|Stan|123
-Stan.v.vliet@hotmail.com|Stan|123
-stan.vanvliet@hotmail.com|Stan|123
-stan.vanvliet1@hotmail.com|Stan|123
