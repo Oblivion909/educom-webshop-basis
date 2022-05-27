@@ -8,18 +8,21 @@
     function showLoginContent()
     {
         $_Data = validateLoginForm();
+        ShowLoginMessage();
        
         if($_Data['Valid'])
         {
            showLoginAuthorized($_Data);
+           $_LoggedIn = true;
         }
         else 
         {
            showLoginForm($_Data);
+           $_LoggedIn = false;
         }
     }
 
-    function ValidateLoginContent()
+    function ShowLoginMessage()
     {
         //Message for Login screen
         echo
@@ -31,6 +34,7 @@
 
     function showLoginForm($_Data)
     {
+        
         //A form to enter email and password
         echo 
         '
@@ -54,7 +58,7 @@
     {
         echo
         '
-            Welcome user: ' . $_Data['LoginEmail'] . '
+            Welcome user: ' . $_Data['UserName'] . '
         ';
     }
    

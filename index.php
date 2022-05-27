@@ -2,6 +2,8 @@
     $_Page = getRequestedPage();
     showResponsePage($_Page);
     
+
+    
     function getRequestedPage()
     {
         $_RequestedType = $_SERVER['REQUEST_METHOD']; 
@@ -65,14 +67,26 @@
     {
         
         echo '<body>';
-            
-        echo '<ul class="LinkList">';
-            showMenuItem("home", "Home");
-            showMenuItem("about", "About");
-            showMenuItem("contact", "Contact");
-            showMenuItem("Login", "Login");
-            showMenuItem("Register", "Register");
-        echo '</ul>';
+        $_LoggedIn = false;
+        if($_LoggedIn = false)
+        {
+            echo '<ul class="LinkList">';
+                showMenuItem("home", "Home");
+                showMenuItem("about", "About");
+                showMenuItem("contact", "Contact");
+                showMenuItem("Login", "Login");
+                showMenuItem("Register", "Register");
+            echo '</ul>';
+        }
+        else
+        {
+            echo '<ul class="LinkList">';
+                showMenuItem("home", "Home");
+                showMenuItem("about", "About");
+                showMenuItem("contact", "Contact");
+                showMenuItem("LogOut", "LogOut");
+            echo '</ul>';
+        }
     }
     function showBody($_Page)
     {
@@ -113,7 +127,8 @@
                 showRegisterHeader();
                 showRegisterContent();
             break;
-        }
+        }     
+        
         echo'</body>';
     }
     function showFooter()

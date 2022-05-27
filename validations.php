@@ -5,8 +5,9 @@
 
     function validateLoginForm()
     {
-        $_LoginPassword =  $_LoginEmail =""; 
+        $_LoginPassword = $_LoginUser =  $_LoginEmail =""; 
         $_LoginPasswordError =  $_LoginEmailError =""; 
+        $_FoundPassword = "";
         $_LoginValid = false;
             
         $_MyFile = fopen("users.txt", "r") or die ("Cannot open file");  
@@ -32,18 +33,36 @@
             }   
             else
             {
-               authenticateUser($_LoginEmail, $_LoginPassword);
+                while(!feof($_MyFile))
+                {
+                    $_String = fgets($_MyFile);
+                    $_StringParts = explode('|', $_String);
+
+                    if($_LoginEmail == $_StringParts[0])
+                    {
+                        $_FoundPassword = $_StringParts[2];
+                        $_LoginUser = $_StringParts[1];
+                        if($_FoundPassword == "")
+                        {
+                            $_LoginEmailError = "Email is not recognised";
+                        }
+                        if($_FoundPassword != $_LoginPassword)
+                        {
+                            $_LoginPasswordError = "Password does not match";                
+                        }
+                        
+                    }
+                }
+                fclose($_MyFile);
             }
-            var_dump($_LoginEmailError);
             //This if statement makes the form invalid if one of the errors is active.
             if(empty ($_LoginPasswordError)&& empty ($_LoginEmailError))
             {
-                //$_Valid = true;
+                $_LoginValid = true;
             }
             
-            return array ("LoginPassword" => $_LoginPassword, "LoginPasswordError" => $_LoginPasswordError,
-            "LoginEmail" => $_LoginEmail, "LoginEmailError" => $_LoginEmailError, "Valid" => $_LoginValid);
-
+        return array ("LoginPassword" => $_LoginPassword, "LoginPasswordError" => $_LoginPasswordError, "UserName" => $_LoginUser,
+        "LoginEmail" => $_LoginEmail, "LoginEmailError" => $_LoginEmailError, "Valid" => $_LoginValid);
     }
     function validateRegisterForm()
     {
@@ -113,39 +132,61 @@
     }
     function validateContactForm()
     {
+        $_GenderError= $_NameError= $_EmailError= $_NumberEnteredError= $_CommentError= $_CommunicationError= "";
+        $_Gender= $_Name= $_Email= $_NumberEntered= $_Comment= $_CommunicationInput= "";
+        $_Valid = false;
         
-    }
-    function authenticateUser($_RegisteredEmail, $_RegisteredPassword)
-    {
-        $_MyFile = fopen("users.txt", "r") or die ("Cannot open file");  
-        $_String = fgets($_MyFile);
-            
-        $_FoundPassword = "";
-       
-        while(!feof($_MyFile))
+        if($_SERVER["REQUEST_METHOD"] == "POST")
         {
-            $_String = fgets($_MyFile);
-            $_StringParts = explode('|', $_String);
+            //If the client submits the form, this checks if all the input fields are filled in and gives them te correct values
             
-            if ($_RegisteredEmail == $_StringParts[0])
-            {
-                $_FoundPassword = $_StringParts[2];  
-            }
+            $_Gender = testInput(getPostVar("_Gender"));
+            $_Name = testInput(getPostVar("_FullName"));
+            $_Email = testInput(getPostVar("_Email"));
+            $_NumberEntered = testInput(getPostVar("_PhoneNumber"));
+            $_Comment = testInput(getPostVar("_Message"));
+            $_CommunicationInput = testInput(getPostVar("_Communication"));
             
-            if($_FoundPassword == "")
+            //These if statements put the correct error message that is required if the field is not entered (correctly)
+            if(empty($_Gender))
             {
-                $_NoEmailFound = true;
-                $_LoginEmailError = "Email is not recognised";
-                //var_dump($_EmailError);  
+                $_GenderError = "Gender is required";
             }
-            elseif($_FoundPassword != $_RegisteredPassword)
+            if(empty($_Name))
             {
-                $_WrongPassword = true;
-                $_LoginPasswordError = "Password does not match";                
+                $_NameError = "Name is required";
+            }
+            elseif(!preg_match("/^[a-zA-Z\' ]*$/", $_Name))
+            {
+                $_NameError= "Only letters and spaces allowed!";
+            } 
+            if(empty($_Email))
+            {
+                $_EmailError = "Email is required";
+            }
+            elseif(!filter_var($_Email, FILTER_VALIDATE_EMAIL))
+            {
+                $_EmailError= "Invalid email format";
+            }   
+            if(empty($_NumberEntered))
+            {
+                $_NumberEnteredError = "Number is required";
+            }
+            if(empty($_Comment))
+            {
+                $_CommentError = "Message is required";
+            }  
+            if(empty($_CommunicationInput))
+            {
+                $_CommunicationError = "Prefered communication type is required";
+            }
+            //This if statement makes the form invalid if one of the errors is active.
+            if(empty($_GenderError) && empty ($_NameError)&& empty ($_EmailError)&& empty ($_NumberEnteredError)&& empty ($_CommentError)&& empty ($_CommunicationError))
+            {
+                $_Valid = true;
             }
         }
-        //check foto van uitleg voor return;
+        //Returns all values as an array for later use.
+        return array("_Gender" => $_Gender, "_GenderError" => $_GenderError, "_FullName" => $_Name, "_NameError" => $_NameError, "_Email" => $_Email, "_EmailError" => $_EmailError, "_PhoneNumber" => $_NumberEntered, "_NumberError" => $_NumberEnteredError, "_Message" => $_Comment, "_CommentError" => $_CommentError, "_Communication" => $_CommunicationInput, "_CommunicationError" => $_CommunicationError, "Valid" => $_Valid);
     }
-    
-    
 ?>
