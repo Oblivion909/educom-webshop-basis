@@ -1,4 +1,7 @@
 <?php
+    session_start();
+
+
     $_Page = getRequestedPage();
     showResponsePage($_Page);
     
@@ -63,36 +66,42 @@
             </ul>
         ';
     }
-    function showMenu()
+    function showMenuLoggedIn()
+    {
+        echo '<ul class="LinkList">';
+            showMenuItem("home", "Home");
+            showMenuItem("about", "About");
+            showMenuItem("contact", "Contact");
+            showMenuItem("LogOut", "Log out");
+        echo '</ul>';
+    }
+    
+    function showMenuLoggedOut()
     {
         
         echo '<body>';
-        $_LoggedIn = false;
-        if($_LoggedIn = false)
-        {
+      
             echo '<ul class="LinkList">';
                 showMenuItem("home", "Home");
                 showMenuItem("about", "About");
                 showMenuItem("contact", "Contact");
-                showMenuItem("Login", "Login");
+                showMenuItem("Login", "Log in");
                 showMenuItem("Register", "Register");
             echo '</ul>';
-        }
-        else
-        {
-            echo '<ul class="LinkList">';
-                showMenuItem("home", "Home");
-                showMenuItem("about", "About");
-                showMenuItem("contact", "Contact");
-                showMenuItem("LogOut", "LogOut");
-            echo '</ul>';
-        }
+       
     }
     function showBody($_Page)
     {
         echo ' <div id="PageContainer"> ';
         //Shows the standard body of the HTML pages
-        showMenu();
+        if($_SESSION["LoggedIn"] == true)
+        {
+            showMenuLoggedIn();
+        }
+        if($_SESSION["LoggedIn"] == false)
+        {
+            showMenuLoggedOut();
+        }
         showContent($_Page);
         showFooter();
     }

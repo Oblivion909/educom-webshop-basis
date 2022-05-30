@@ -13,18 +13,17 @@
         if($_Data['Valid'])
         {
            showLoginAuthorized($_Data);
-           $_LoggedIn = true;
         }
         else 
         {
            showLoginForm($_Data);
-           $_LoggedIn = false;
         }
     }
 
     function ShowLoginMessage()
     {
         //Message for Login screen
+        var_dump ($_SESSION["LoggedIn"]);
         echo
         '
             <p class="pLoginmessage"> Please enter login credentials below.</p>
@@ -34,8 +33,8 @@
 
     function showLoginForm($_Data)
     {
-        
         //A form to enter email and password
+       
         echo 
         '
             <form method="post" action="index.php?page=Login">

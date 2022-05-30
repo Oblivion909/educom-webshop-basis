@@ -1,5 +1,6 @@
 <?php
     include 'validations.php';
+
     function showRegisterHeader()
     {
         echo "<h1> Register </h1>";
