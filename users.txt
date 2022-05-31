@@ -1,6 +1,9 @@
 EMAIL|USERNAME|PASSWORD
-123@123.com|Stan|123|
+123@123.com|Stan|123
 321@321.com|Nats|321
 Stannie@123.com|Stannie|1234
 456@456.com|lol|456
 Kaasstengel@nl.com|Kaasstengel|Kaas
+1@1.com|ston|123
+Stan.v.vliet@hotmail.com|Stan|123
+Stan.v.vliet@hot.com|Stan|123

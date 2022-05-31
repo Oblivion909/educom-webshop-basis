@@ -1,24 +1,9 @@
 <?php
-    include 'validations.php';
-
     function showContactHeader()
     {
        echo "<h1> Contact </h1>";
     }
     
-    function showContactContent()
-    {
-        $_Data = validateContactForm();
-       
-        if($_Data['Valid'])
-        {
-           showContactThanks($_Data);
-        }
-        else 
-        {
-           showContactForm($_Data);
-        }
-    }
     
     function showContactForm($_Data)
     {
@@ -47,7 +32,7 @@
                 <span class="error">* ' .  $_Data['_NumberError'] . ' </span> <br><br>
                 
                 <label class="MarginForAllingment" for="_Message">Your message:</label>
-                <textarea name= "_Message" value="' . $_Data['_Message'] . '"></textarea>
+                <textarea name= "_Message" >' . $_Data['_Message'] . '</textarea>
                 <span class="error">* ' . $_Data['_CommentError'] . '</span>  <br><br>
                 
                 ';

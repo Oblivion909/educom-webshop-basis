@@ -1,13 +1,13 @@
 <?php
-    include 'userservice.php';
+    //include 'userservice.php';
     // Validate every form in this script
-
 
     function validateLoginForm()
     {
         $_LoginPassword = $_LoginUser =  $_LoginEmail =""; 
         $_LoginPasswordError =  $_LoginEmailError =""; 
         $_FoundPassword = "";
+        $_RegisterError = "";
         $_LoginValid = false;
             
         $_MyFile = fopen("users.txt", "r") or die ("Cannot open file");  
@@ -40,7 +40,8 @@
 
                     if($_LoginEmail == $_StringParts[0])
                     {
-                        $_FoundPassword = $_StringParts[2];
+                        var_dump("Ik word herkent");
+                        $_FoundPassword = trim($_StringParts[2]);
                         $_LoginUser = $_StringParts[1];
                         if($_FoundPassword == "")
                         {
@@ -50,7 +51,11 @@
                         {
                             $_LoginPasswordError = "Password does not match";                
                         }
-                        
+                        break;
+                    }
+                    elseif(feof($_MyFile) && $_LoginEmail != $_StringParts[0])
+                    {
+                        $_LoginEmailError = "Email is not recognised";
                     }
                 }
                 fclose($_MyFile);
@@ -59,7 +64,6 @@
             if(empty ($_LoginPasswordError)&& empty ($_LoginEmailError))
             {
                 $_LoginValid = true;
-                
             }
             
         if ($_LoginValid == true)
@@ -69,9 +73,9 @@
        
         return array ("LoginPassword" => $_LoginPassword, "LoginPasswordError" => $_LoginPasswordError, "UserName" => $_LoginUser,
         "LoginEmail" => $_LoginEmail, "LoginEmailError" => $_LoginEmailError, "Valid" => $_LoginValid);
-        
-        
     }
+    
+    
     function validateRegisterForm()
     {
         $_Name = $_Password = $_ScndPassword=  $_Email =""; 
@@ -189,7 +193,8 @@
                 $_CommunicationError = "Prefered communication type is required";
             }
             //This if statement makes the form invalid if one of the errors is active.
-            if(empty($_GenderError) && empty ($_NameError)&& empty ($_EmailError)&& empty ($_NumberEnteredError)&& empty ($_CommentError)&& empty ($_CommunicationError))
+            if(empty($_GenderError) && empty ($_NameError)&& empty ($_EmailError)
+                && empty ($_NumberEnteredError)&& empty ($_CommentError)&& empty ($_CommunicationError))
             {
                 $_Valid = true;
             }

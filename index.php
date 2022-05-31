@@ -1,11 +1,9 @@
 <?php
     session_start();
-
-
     $_Page = getRequestedPage();
-    showResponsePage($_Page);
+    $_Data = processRequest($_Page);
+    showResponsePage($_Data);
     
-
     
     function getRequestedPage()
     {
@@ -20,12 +18,56 @@
         }
         return $_RequestedPage;
     }
-    function showResponsePage($_Page)
+    function processRequest($_Page)
+    {
+        switch($_Page)
+        {
+            case "Login":
+                require_once('Login.php');
+                require_once('validations.php');
+                $_Data = validateLoginForm();
+                if($_Data['Valid'])
+                {
+                    $_SESSION['UserName'] = $_Data['UserName'];
+                    $_Page = "home";
+                }
+                break;
+            case "Register":
+                require_once("Register.php");
+                require_once('validations.php');
+                require_once("userservice.php");
+                $_Data =  validateRegisterForm();
+                if($_Data['Valid'])
+                {
+                    RegisterFormValidated($_Data);
+                }  
+                break;
+            case "contact":
+                require_once ('contact.php');
+                require_once('validations.php');
+                $_Data = validateContactForm();
+                if($_Data['Valid'])
+                {
+                   $_Page = "Thanks";
+                }
+                break;
+            case "LogOut":
+                session_unset();
+                session_Destroy();
+                $_Page = "home";
+                break;
+        }
+        $_Data['page'] = $_Page;
+        return $_Data;
+    }
+    
+
+    function showResponsePage($_Data)
     {
         //Show all the content of the page 
         beginDocument();
         showHead();
-        showBody($_Page);
+        showBody($_Data);
         endDocument();
     }
     function getArrayVar($_Array, $_Key, $_Default = '')
@@ -72,7 +114,7 @@
             showMenuItem("home", "Home");
             showMenuItem("about", "About");
             showMenuItem("contact", "Contact");
-            showMenuItem("LogOut", "Log out");
+            showMenuItem("LogOut", "Log out " . $_SESSION['UserName']);
         echo '</ul>';
     }
     
@@ -90,52 +132,56 @@
             echo '</ul>';
        
     }
-    function showBody($_Page)
+    function showBody($_Data)
     {
         echo ' <div id="PageContainer"> ';
         //Shows the standard body of the HTML pages
-        if($_SESSION["LoggedIn"] == true)
+        if(isset($_SESSION["LoggedIn"]))
         {
             showMenuLoggedIn();
         }
-        if($_SESSION["LoggedIn"] == false)
+        else
         {
             showMenuLoggedOut();
         }
-        showContent($_Page);
+        showContent($_Data);
         showFooter();
     }
-    function showContent($_Page)
+    function showContent($_Data)
     {
         //A switch case to decide on which content to show according to the correct page
-       
-        switch ($_Page)
+        var_dump($_Data);
+        switch ($_Data['page'])
         {
             case 'home':
-                require('home.php');
+                require_once('home.php');
                 showHomeHeader();
                 showHomeContent();
-            break;
+                break;
             case 'about':
-                require('about.php');
+                require_once('about.php');
                 showAboutHeader();
                 showAboutContent();
-            break;
+                break;
             case 'contact':
-                require('contact.php');
+                require_once('contact.php');
                 showContactHeader();
-                showContactContent();
-            break;
+                showContactForm($_Data);
+                break;
             case 'Login':
-                require('Login.php');
+                require_once('Login.php');
                 showLoginHeader();
-                showLoginContent();
-            break;
+                showLoginForm($_Data);
+                break; 
             case 'Register':
-                require('Register.php');
+                require_once('Register.php');
                 showRegisterHeader();
-                showRegisterContent();
-            break;
+                showRegisterForm($_Data);
+                break;
+            case 'Thanks':
+                require_once('contact.php');
+                showContactThanks($_Data);
+                break;
         }     
         
         echo'</body>';

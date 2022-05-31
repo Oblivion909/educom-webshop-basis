@@ -1,23 +1,7 @@
 <?php
-    include 'validations.php';
     function showLoginHeader()
     {
         echo   "<h1> Login </h1>" ;
-    }
-
-    function showLoginContent()
-    {
-        $_Data = validateLoginForm();
-        ShowLoginMessage();
-       
-        if($_Data['Valid'])
-        {
-           showLoginAuthorized($_Data);
-        }
-        else 
-        {
-           showLoginForm($_Data);
-        }
     }
 
     function ShowLoginMessage()
@@ -52,13 +36,4 @@
         ';
         
     }
-    
-    function showLoginAuthorized($_Data)
-    {
-        echo
-        '
-            Welcome user: ' . $_Data['UserName'] . '
-        ';
-    }
-   
 ?>

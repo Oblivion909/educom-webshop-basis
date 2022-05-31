@@ -1,25 +1,10 @@
 <?php
-    include 'validations.php';
 
     function showRegisterHeader()
     {
         echo "<h1> Register </h1>";
     }
-        
-    function showRegisterContent()
-    {
-        $_Data =  validateRegisterForm();
-        if($_Data['Valid'])
-        {
-            RegisterFormValidated($_Data);
-        }  
-        else
-        {
-            ShowRegisterForm($_Data);
-        }
-    }
-    
-   
+  
     function ShowRegisterForm($_Data)
     {
         echo 
